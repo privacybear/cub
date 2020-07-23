@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+      "module": "system",
+      // "alwaysStrict": true,
+      // "declaration": true,
+      "target": "ESNext",
+      "rootDir": "./src",
+      "outFile": "./dist/cub.js"
+    },
+    "skipLibCheck": true,
+    "exclude": ["node_modules"]
+  }
