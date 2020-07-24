@@ -36,6 +36,10 @@ namespace Wrapper {
     value: "",
     writable: false,
   });
+  Object.defineProperty(document, "cookie", {
+    value: "",
+    writable: false,
+  });
   //#endregion DocumentAPI
   console.log("Cub is loaded 🐾");
 }
