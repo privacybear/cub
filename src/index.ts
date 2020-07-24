@@ -31,5 +31,11 @@ namespace Wrapper {
   }
   //#endregion GeolocationAPI
 
+  //#region DocumentAPI
+  Object.defineProperty(document, "referrer", {
+    value: "",
+    writable: false,
+  });
+  //#endregion DocumentAPI
   console.log("Cub is loaded 🐾");
 }
