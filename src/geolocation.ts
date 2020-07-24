@@ -1,16 +1,16 @@
 namespace Wrapper {
+  export interface ICoords {
+    accuracy: null | number;
+    altitude: null | number;
+    altitudeAccuracy: null | number;
+    heading: null | string;
+    latitude: null | number;
+    longitude: null | number;
+    speed: null | number;
+  }
   export class GeolocationPosition {
-    coords = {
-      accuracy: 269309,
-      altitude: null,
-      altitudeAccuracy: null,
-      heading: null,
-      latitude: 51.085853,
-      longitude: 10.377857,
-      speed: null,
-    };
     timestamp = Date.now();
-    constructor() {
+    constructor(public coords: ICoords) {
       console.log(
         window.location.host + " just tried to access your geolocation data"
       );

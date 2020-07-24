@@ -1,28 +1,24 @@
-namespace Wrapper{
-  export class BatteryManager {
+namespace Wrapper {
+  export interface IBattery {
     charging: boolean;
     chargingTime: number;
     dischargingTime: number;
     level: number;
-    onchargingchange: any;
-    onchargingtimechange: any;
-    ondischargingtimechange: any;
-    onlevelchange: any;
-    protected addEventListener: EventListener;
+  }
+  export class BatteryManager {
+    charging = config.battery.charging;
+    chargingTime = config.battery.chargingTime;
+    dischargingTime = config.battery.dischargingTime;
+    level = config.battery.level;
+    onchargingchange = null;
+    onchargingtimechange = null;
+    ondischargingtimechange = null;
+    onlevelchange = null;
     constructor() {
-      this.charging = true;
-      this.chargingTime = 0;
-      this.dischargingTime = Infinity;
-      this.level = 1;
-      this.onchargingchange = null;
-      this.onchargingtimechange = null;
-      this.ondischargingtimechange = null;
-      this.onlevelchange = null;
-      this.addEventListener = () => {};
       console.log(
-        window.location.host + " just tried to access your battery stats"
+        `${window.location.host} just tried to access your battery stats`
       );
     }
+    protected addEventListener() {}
   }
-  
 }
