@@ -16,7 +16,7 @@ namespace Wrapper {
     onlevelchange = null;
     constructor() {
       console.log(
-        `${window.location.host} just tried to access your battery stats`
+        window.location.host + " just tried to access your battery stats"
       );
     }
     protected addEventListener() {}
