@@ -1,0 +1,18 @@
+{
+  "devDependencies": {
+    "terser": "^4.8.0",
+    "typescript": "^3.9.7"
+  },
+  "name": "cub",
+  "version": "1.0.0",
+  "description": "Cub is an injectable script for populating fake/no data by modifying default getters.",
+  "main": "dist/cub.modern.js",
+  "types": "dist/index.d.ts",
+  "repository": "https://github.com/privacybear/cub.git",
+  "author": "Utkarsh Dubey <utkarsh.dubey3jan@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "terser --cmo dist/cub.js dist/cub.js"
+  }
+}
