@@ -1,5 +1,6 @@
 namespace Wrapper {
   interface IConfig {
+    items?: string[];
     location?: ICoords;
     webgl_fingerprint?: boolean;
     cookie?: string;
@@ -7,6 +8,7 @@ namespace Wrapper {
     battery?: IBattery;
   }
   export const config = {
+    items: [`ITEMS_PLACEHOLDER`],
     location: {
       accuracy: 269309,
       altitude: null,
@@ -22,7 +24,7 @@ namespace Wrapper {
     battery: {},
   } as IConfig;
   //#region BatteryAPI
-  if (config.battery != null)
+  if (config.items.includes("BATTERY"))
     Object.defineProperty(navigator, "getBattery", {
       value: async () => new BatteryManager(),
       writable: false,
@@ -30,7 +32,7 @@ namespace Wrapper {
   //#endregion BatteryAPI
 
   //#region GeolocationAPI
-  if (config.location != null && "geolocation" in navigator) {
+  if (config.items.includes("GEOLOCATION") && "geolocation" in navigator) {
     let geolocationWatchersCount = 0;
 
     Object.defineProperty(navigator.geolocation, "getCurrentPosition", {
@@ -55,15 +57,9 @@ namespace Wrapper {
   //#endregion GeolocationAPI
 
   //#region DocumentAPI
-  if (config.referrer != null) {
+  if (config.items.includes("REFERRER")) {
     Object.defineProperty(document, "referrer", {
       value: config.referrer,
-      writable: false,
-    });
-  }
-  if (config.cookie != null) {
-    Object.defineProperty(document, "cookie", {
-      value: config.cookie,
       writable: false,
     });
   }
