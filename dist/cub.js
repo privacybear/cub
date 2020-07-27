@@ -10,7 +10,7 @@ var Wrapper;
             this.onchargingtimechange = null;
             this.ondischargingtimechange = null;
             this.onlevelchange = null;
-            console.log(`${window.location.host} just tried to access your battery stats`);
+            console.log(window.location.host + " just tried to access your battery stats");
         }
         addEventListener() { }
     }
@@ -30,6 +30,7 @@ var Wrapper;
 var Wrapper;
 (function (Wrapper) {
     Wrapper.config = {
+        items: [`ITEMS_PLACEHOLDER`],
         location: {
             accuracy: 269309,
             altitude: null,
@@ -42,17 +43,19 @@ var Wrapper;
         webgl_fingerprint: false,
         cookie: "",
         referrer: "",
-        battery: {},
+        battery: {
+            level: 1,
+        },
     };
     //#region BatteryAPI
-    if (Wrapper.config.battery != null)
+    if (Wrapper.config.items.includes("BATTERY"))
         Object.defineProperty(navigator, "getBattery", {
             value: async () => new Wrapper.BatteryManager(),
             writable: false,
         });
     //#endregion BatteryAPI
     //#region GeolocationAPI
-    if (Wrapper.config.location != null && "geolocation" in navigator) {
+    if (Wrapper.config.items.includes("GEOLOCATION") && "geolocation" in navigator) {
         let geolocationWatchersCount = 0;
         Object.defineProperty(navigator.geolocation, "getCurrentPosition", {
             value: (func) => func(new Wrapper.GeolocationPosition(Wrapper.config.location)),
@@ -73,18 +76,20 @@ var Wrapper;
     }
     //#endregion GeolocationAPI
     //#region DocumentAPI
-    if (Wrapper.config.referrer != null) {
+    if (Wrapper.config.items.includes("REFERRER")) {
         Object.defineProperty(document, "referrer", {
             value: Wrapper.config.referrer,
             writable: false,
         });
     }
-    if (Wrapper.config.cookie != null) {
-        Object.defineProperty(document, "cookie", {
-            value: Wrapper.config.cookie,
-            writable: false,
+    //#endregion DocumentAPI
+    //#region sendBeacon
+    if (Wrapper.config.items.includes("BEACON")) {
+        Object.defineProperty(navigator, "sendBeacon", {
+            value: console.log,
+            writable: true,
         });
     }
-    //#endregion DocumentAPI
+    //#endregion sendBeacon
     console.log("Cub is loaded 🐾");
 })(Wrapper || (Wrapper = {}));

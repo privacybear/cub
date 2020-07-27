@@ -21,8 +21,11 @@ namespace Wrapper {
     webgl_fingerprint: false,
     cookie: "",
     referrer: "",
-    battery: {},
+    battery: {
+      level: 1,
+    },
   } as IConfig;
+
   //#region BatteryAPI
   if (config.items.includes("BATTERY"))
     Object.defineProperty(navigator, "getBattery", {
@@ -64,5 +67,14 @@ namespace Wrapper {
     });
   }
   //#endregion DocumentAPI
+
+  //#region sendBeacon
+  if (config.items.includes("BEACON")) {
+    Object.defineProperty(navigator, "sendBeacon", {
+      value: console.log,
+      writable: true,
+    });
+  }
+  //#endregion sendBeacon
   console.log("Cub is loaded 🐾");
 }
